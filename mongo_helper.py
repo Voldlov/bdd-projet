@@ -3,7 +3,7 @@ from pymongo import MongoClient
 class mongoHelper:
     def __init__(self, connect) -> None:
         # Constructeur
-        connect = "mongodb+srv://Bergfrid:1234@cluster0.em3v4rs.mongodb.net/?retryWrites=true&w=majority"
+        connect = ""
         # Enregistrer le client mongo
         self.client = MongoClient(connect)
         # Enregistrer la bdd voulu
