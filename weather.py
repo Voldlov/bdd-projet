@@ -1,9 +1,9 @@
 """
-    Récupération des données de l'API
+    Récupération des données de l'API | API data retrieval
 """
 
 
 
 """
-    Stockage des données dans MongoDB
+    Stockage des données dans MongoDB | Storing data in MongoDB
 """
