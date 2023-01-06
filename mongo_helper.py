@@ -10,3 +10,15 @@ class mongoHelper:
     def collect(self, collection, donnees):
         self.donnees = ""
         pass
+
+    def add(self):
+        # Ajouter des données.
+        pass
+
+    def update(self):
+        # Moficier des données.
+        pass
+
+    def remove(self):
+        # Supprimer des données
+        pass
