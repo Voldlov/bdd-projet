@@ -1,11 +1,20 @@
 from pymongo import MongoClient
 
 class MongoHelper:
+
+    """
+        Constructor
+    """
+
     def __init__(self, connect, bdd) -> None:
         # Enregistrer le client mongo
         self.client = MongoClient(connect)
         # Enregistrer la bdd voulu
         self.bdd = self.client[bdd]
+    
+    """
+        CRUD
+    """
 
     def add(self, collection, data):
         # Ajouter des données.
@@ -22,3 +31,10 @@ class MongoHelper:
     def get(self, collection, data):
         # Récuperer les données
         self.bdd[collection].find(data)
+
+    """
+        Agregate
+    """
+
+    def agregate(self):
+        pass
