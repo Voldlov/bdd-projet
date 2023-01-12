@@ -44,7 +44,7 @@ Installez les dépendances python
 
 Lancez le serveur
 
-```python app.py``` Flask ?
+```python main.py```
 
 ### Client frontend (vue.js)
 Installez les dépendances npm
