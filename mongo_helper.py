@@ -13,31 +13,12 @@ class MongoHelper:
 
     def update(self, collection, data):
         # Modifier des données.
-        one = self.readData(data)
-        if one :
-            collection.update_one(data)
-        else :
-            collection.update_many(data)
+        self.bdd[collection].update_many(data)
 
     def remove(self, collection, data):
         # Supprimer des données
-        one = self.readData(data)
-        if one :
-            collection.delete_one(data)
-        else :
-            collection.delete_many(data)
+        self.bdd[collection].delete_many(data)
 
     def get(self, collection, data):
         # Récuperer les données
-        one = self.readData(data)
-        if one :
-            collection.find_one(data)
-        else :
-            collection.find_many(data)
-
-    def readData(self, data):
-        one = False
-        if data == "" :
-            one = True
-        return one
-
+        self.bdd[collection].find_many(data)
