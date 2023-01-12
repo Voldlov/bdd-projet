@@ -1,6 +1,6 @@
-from pymongo import MongoClient 
+from pymongo import MongoClient
 
-class mongoHelper:
+class MongoHelper:
     def __init__(self, connect, bdd) -> None:
         # Enregistrer le client mongo
         self.client = MongoClient(connect)
@@ -8,7 +8,6 @@ class mongoHelper:
         self.bdd = self.client[bdd]
 
     def collect(self, collection, donnees):
-        
         pass
 
     def add(self, collection, donnees):
