@@ -1,6 +1,7 @@
-from pymongo import MongoClient 
+from pymongo import MongoClient
 
-class mongoHelper:
+
+class MongoHelper:
     def __init__(self, connect) -> None:
         # Constructeur
         connect = ""
@@ -11,7 +12,6 @@ class mongoHelper:
         pass
 
     def collect(self, collection, donnees):
-        
         pass
 
     def add(self, collection, donnees):
