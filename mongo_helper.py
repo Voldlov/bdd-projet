@@ -7,13 +7,9 @@ class MongoHelper:
         # Enregistrer la bdd voulu
         self.bdd = self.client[bdd]
 
-    def collect(self, collection, donnees):
-        pass
-
     def add(self, collection, donnees):
         # Ajouter des données.
-        collection.insert_one({donnees})
-        pass
+        collection.insert({donnees})
 
     def update(self, collection, donnees):
         # Moficier des données.
