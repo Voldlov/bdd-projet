@@ -26,7 +26,7 @@ def bonjour():
 
 @app.route('/data', methods=['POST'])
 def create_data():
-
+    data2 = earthquakeAPI.fetch_monthly_data()
     data = request.form["data"]
     mongo_helper.add(data)
     return succes()
