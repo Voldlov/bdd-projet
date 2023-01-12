@@ -1,91 +1,82 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <EasyDataTable
+      v-model:items-selected="itemsSelected"
+    :headers="headers"
+    :items="items"
+  >
+    <template #item-operation="item">
+      <div class="operation-wrapper">
+        <img
+          src="./images/delete.png"
+          class="operation-icon"
+          @click="deleteItem(item)"
+        />
+        <img
+          src="./images/edit.png"
+          class="operation-icon"
+          @click="editItem(item)"
+        />
+      </div>
+    </template>
+  </EasyDataTable>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+import type { Header, Item } from "vue3-easy-data-table";
+import ApiService from "@/services/api";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+export default defineComponent({
+  setup() {
+    const headers: Header[] = [
+      { text: "Name", value: "name" },
+      { text: "Height (cm)", value: "height", sortable: true },
+      { text: "Weight (kg)", value: "weight", sortable: true },
+      { text: "Age", value: "age", sortable: true },
+      { text: "Operation", value: "operation" },
+    ];
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
+    const items: Item[] = [
+      { "name": "Curry", "height": 178, "weight": 77, "age": 20 },
+      { "name": "James", "height": 180, "weight": 75, "age": 21 },
+      { "name": "Jordan", "height": 181, "weight": 73, "age": 22 }
+    ];
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+    const itemsSelected: Item[] = ref([]);
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
+    const deleteItem = (item: Item) => {
+      ApiService.delete(item._id);
+      const idx = items.findIndex((i) => i._id === item._id);
+      items.splice(idx, 1);
+      console.log("delete item", item);
+    };
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
+    const editItem = (item: Item) => {
+      //display edit form
 
-nav a:first-of-type {
-  border: 0;
-}
+      // update item data
+      const idx = items.findIndex((i) => i._id === item._id);
+      items.splice(idx, 1, item);
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+    };
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+    const update = (item: Item) => {
+      ApiService.update(item._id, item);
+      console.log("edit item", item);
+    }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+    return {
+      headers,
+      items,
+      itemsSelected
+    };
+  },
+});
+</script>
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+<style>
+.operation-wrapper .operation-icon {
+  width: 20px;
+  cursor: pointer;
 }
 </style>
