@@ -7,19 +7,34 @@ class MongoHelper:
         # Enregistrer la bdd voulu
         self.bdd = self.client[bdd]
 
-    def add(self, collection, donnees):
+    def add(self, collection, data):
         # Ajouter des données.
-        collection.insert({donnees})
+        collection.insert({data})
 
-    def update(self, collection, donnees):
+    def update(self, collection, data, one):
         # Modifier des données.
-        collection.update_one({donnees})
+        if one == True:
+            collection.update_one({data})
+        else :
+            collection.update_many({data})
 
-    def remove(self, collection, donnees):
+    def remove(self, collection, data, one):
         # Supprimer des données
-        collection.delete_one({donnees})
+        if one == True :
+            collection.delete_one({data})
+        else :
+            collection.delete_many({data})
 
-    def get(self, collection, donnees):
+    def get(self, collection, data, one):
         # Récuperer les données
-        collection.find({donnees})
+        if one == True :
+            collection.find_one({data})
+        else :
+            collection.find_many({data})
+
+    def readData(self, data):
+        one = False
+        if data == "" :
+            one = True
+        return one
 
