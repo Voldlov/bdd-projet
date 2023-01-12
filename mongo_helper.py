@@ -13,21 +13,21 @@ class MongoHelper:
 
     def update(self, collection, data, one):
         # Modifier des données.
-        if one == True:
+        if one :
             collection.update_one({data})
         else :
             collection.update_many({data})
 
     def remove(self, collection, data, one):
         # Supprimer des données
-        if one == True :
+        if one :
             collection.delete_one({data})
         else :
             collection.delete_many({data})
 
     def get(self, collection, data, one):
         # Récuperer les données
-        if one == True :
+        if one :
             collection.find_one({data})
         else :
             collection.find_many({data})
