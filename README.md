@@ -33,6 +33,28 @@ Pour les fichiers :
 - Quels sont les données de ce fichier (pourquoi ce/ces fichier)
 - Les colonnes et leur utilité
 
+## Installation
+
+Clonez le projet sur votre ordinateur.
+
+### Backend (Flask)
+Installez les dépendances python
+
+```pip install -r requirements.txt```
+
+Lancez le serveur
+
+```python app.py``` Flask ?
+
+### Client frontend (vue.js)
+Installez les dépendances npm
+
+```cd dashboard && npm install```
+
+Lancez le client 
+
+```cd dashboard && npm run dev```
+
 ## Utilisation de l'interface
 
 ## L'équipe
