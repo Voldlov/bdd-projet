@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import json
 from urllib import response
-
+from pprint import pprint
 from flask import Flask, request, redirect, url_for
+from pymongo import MongoClient
 
 from earthquake import EarthquakeAPI
 from mongo_helper import MongoHelper
@@ -16,6 +17,8 @@ def succes():
 
 earthquakeAPI = EarthquakeAPI()
 mongo_helper = MongoHelper("mongodb://localhost:27017", "Tremblement")
+data = earthquakeAPI.fetch_monthly_data()
+mongo_helper.add("tremblement", data)
 
 
 @app.route('/')  # initialiser un decorateur sur la route racine "/"
@@ -26,9 +29,8 @@ def bonjour():
 
 @app.route('/data', methods=['POST'])
 def create_data():
-    data2 = earthquakeAPI.fetch_monthly_data()
     data = request.form["data"]
-    mongo_helper.add(data)
+    mongo_helper.add("tremble", data)
     return succes()
 
 

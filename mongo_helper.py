@@ -9,7 +9,7 @@ class MongoHelper:
 
     def add(self, collection, data):
         # Ajouter des données.
-        collection.insert({data})
+        self.bdd[collection].insert_many(data)
 
     def update(self, collection, data):
         # Modifier des données.
