@@ -15,25 +15,25 @@ class MongoHelper:
         # Modifier des données.
         one = self.readData(data)
         if one :
-            collection.update_one({data})
+            collection.update_one(data)
         else :
-            collection.update_many({data})
+            collection.update_many(data)
 
     def remove(self, collection, data):
         # Supprimer des données
         one = self.readData(data)
         if one :
-            collection.delete_one({data})
+            collection.delete_one(data)
         else :
-            collection.delete_many({data})
+            collection.delete_many(data)
 
     def get(self, collection, data):
         # Récuperer les données
         one = self.readData(data)
         if one :
-            collection.find_one({data})
+            collection.find_one(data)
         else :
-            collection.find_many({data})
+            collection.find_many(data)
 
     def readData(self, data):
         one = False
