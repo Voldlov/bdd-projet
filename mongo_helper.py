@@ -14,9 +14,12 @@ class MongoHelper:
     def update(self, collection, donnees):
         # Modifier des données.
         collection.update_one({donnees})
-        pass
 
     def remove(self, collection, donnees):
         # Supprimer des données
         collection.delete_one({donnees})
-        pass
+
+    def get(self, collection, donnees):
+        # Récuperer les données
+        collection.find({donnees})
+
