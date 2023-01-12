@@ -21,4 +21,4 @@ class MongoHelper:
 
     def get(self, collection, data):
         # Récuperer les données
-        self.bdd[collection].find_many(data)
+        self.bdd[collection].find(data)
