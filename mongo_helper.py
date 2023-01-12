@@ -12,7 +12,7 @@ class MongoHelper:
         collection.insert({donnees})
 
     def update(self, collection, donnees):
-        # Moficier des données.
+        # Modifier des données.
         collection.update_one({donnees})
         pass
 
