@@ -1,3 +1,4 @@
+from bson import ObjectId
 from pymongo import MongoClient
 
 class MongoHelper:
@@ -26,7 +27,8 @@ class MongoHelper:
 
     def remove(self, collection, data):
         # Supprimer des données
-        self.bdd[collection].delete_many(data)
+        query = {'_id': ObjectId(data)}
+        self.bdd[collection].delete_many(query)
 
     def get(self, collection, data):
         # Récuperer les données

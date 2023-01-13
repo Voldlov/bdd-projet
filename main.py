@@ -17,8 +17,8 @@ def succes():
 
 earthquakeAPI = EarthquakeAPI()
 mongo_helper = MongoHelper("mongodb://localhost:27017", "Tremblement")
-data = earthquakeAPI.fetch_monthly_data()
-mongo_helper.add("tremblement", data)
+#data = earthquakeAPI.fetch_monthly_data()
+mongo_helper.remove("tremblement","63c02d8d47216614313c850d")
 
 
 @app.route('/')  # initialiser un decorateur sur la route racine "/"
@@ -52,7 +52,7 @@ def update_data():
 @app.route('/data', methods=['DELETE'])
 def delete_data():
     user = request.args.get('_id')
-    # mongo_helper.remove(user)
+    mongo_helper.remove([user])
     return succes()
 
 
