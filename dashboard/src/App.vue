@@ -19,6 +19,8 @@
       </div>
     </template>
   </EasyDataTable>
+  <button>Créer</button>
+  <button>Supprimer</button>
 </template>
 
 <script lang="ts">
@@ -42,6 +44,8 @@ export default defineComponent({
       { "name": "Jordan", "height": 181, "weight": 73, "age": 22 }
     ];
 
+    // const items = ApiService.getAll();
+
     const itemsSelected: Item[] = ref([]);
 
     const deleteItem = (item: Item) => {
@@ -54,10 +58,9 @@ export default defineComponent({
     const editItem = (item: Item) => {
       //display edit form
 
-      // update item data
+      // then update item data
       const idx = items.findIndex((i) => i._id === item._id);
       items.splice(idx, 1, item);
-
     };
 
     const update = (item: Item) => {
