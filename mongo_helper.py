@@ -27,11 +27,13 @@ class MongoHelper:
 
     def remove(self, collection, data):
         # Supprimer des données
+        # S'il y a des documents importants, mettre des sécurités. 
         query = {'_id': ObjectId(data)}
         self.bdd[collection].delete_many(query)
 
     def get(self, collection, data):
         # Récuperer les données
+        # Modifier pour faire en aggregate. 
         self.bdd[collection].find(data)
 
     """
@@ -40,3 +42,7 @@ class MongoHelper:
 
     def agregate(self):
         pass
+
+    """
+        Tests
+    """
