@@ -18,7 +18,6 @@ def succes():
 earthquakeAPI = EarthquakeAPI()
 mongo_helper = MongoHelper("mongodb://localhost:27017", "Tremblement")
 #data = earthquakeAPI.fetch_monthly_data()
-mongo_helper.remove("tremblement","63c02d8d47216614313c850d")
 
 
 @app.route('/')  # initialiser un decorateur sur la route racine "/"
@@ -58,3 +57,8 @@ def delete_data():
 
 if __name__ == '__main__':  # appler les fonctions a l'interieur du script
     app.run(host='0.0.0.0', port=8080)
+
+@app.route('/synchronize_live')
+def synch():
+    data=earthquakeAPI.fetch_yesterday_data()
+    return succes()
