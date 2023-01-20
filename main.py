@@ -1,11 +1,9 @@
 #!/usr/bin/python
 import json
-from urllib import response
-from pprint import pprint
-from flask import Flask, request, redirect, url_for
-from pymongo import MongoClient
+from flask import Flask, request
 
 from earthquake import EarthquakeAPI
+from weather import WeatherAPI
 from mongo_helper import MongoHelper
 
 app = Flask(__name__)  # definir le nom de l'application "app"
@@ -20,8 +18,7 @@ earthquake_collection = "earthquake"
 aggregate_collection = "aggregate"
 
 earthquakeAPI = EarthquakeAPI()
-mongo_helper = MongoHelper("mongodb://localhost:27017", "Tremblement")
-#data = earthquakeAPI.fetch_monthly_data()
+mongo_helper = MongoHelper("mongodb://localhost:27017", "earthquake")
 
 
 @app.route('/data', methods=['POST'])
