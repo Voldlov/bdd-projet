@@ -62,6 +62,8 @@ export default defineComponent({
       items:  [
       { "_id": "ObjectId(feweweoip)", "magnitude": 8, "date": "18-04-2012", "latitude": 245, "longitude": 142},
     ] as Item[],
+      // fetch items from api
+      // items: ApiService.getEarthquakes(),
       itemsSelected: [] as Item[],
       modalEdit: false,
       editedItem: {} as Item,
