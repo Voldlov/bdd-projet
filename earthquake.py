@@ -13,7 +13,7 @@ class EarthquakeAPI:
         today = datetime.timestamp(datetime.now())
         begin = date.fromtimestamp(today - 2629800).strftime("%Y-%m-%d")
         end = date.fromtimestamp(today - 172800).strftime("%Y-%m-%d")
-
+        
         url = self.base_url + "query?format=geojson&starttime=" + begin + "&endtime=" + end
         print(url)
         response = requests.get(url)
