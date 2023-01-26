@@ -35,9 +35,9 @@ class MongoHelper:
         # Ajouter des données.
         self.bdd[collection].insert_many(data)
 
-    def update(self, collection, ids, data):
+    def update(self, collection, id, data):
         # Modifier des données.
-        self.bdd[collection].update_many(ids, data)
+        self.bdd[collection].update_many({"id": {"$eq": id}}, {"$set": data})
 
     def remove(self, collection, data):
         # Supprimer des données
@@ -160,3 +160,4 @@ class MongoHelper:
 
         agregate = self.bdd[earthquake_collection].aggregate(pipeline)
         self.bdd[aggregate_collection].insert_many(agregate)
+        self.bdd[aggregate_collection].create_index("id")

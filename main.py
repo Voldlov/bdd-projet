@@ -59,8 +59,10 @@ def result_data():
 @app.route('/data', methods=['PUT'])
 @cross_origin()
 def update_data():
-    data = request.form["data"]
-    mongo_helper.update(aggregate_collection, data)
+    _id = request.args.get('id')
+    data = request.get_json()
+
+    mongo_helper.update(aggregate_collection, _id, data)
     return succes()
 
 

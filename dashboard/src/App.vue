@@ -28,15 +28,7 @@
     <h2>Edition</h2>
     <div>
       <p>Magnitude</p>
-      <input v-model="editedItem.magnitude"/>
-    </div>
-    <div>
-      <p>Longitude</p>
-      <input v-model="editedItem.longitude"/>
-    </div>
-    <div>
-      <p>Latitude</p>
-      <input v-model="editedItem.latitude"/>
+      <input v-model="editedItem.properties.mag"/>
     </div>
     <button @click="editItem">Valider</button>
   </div>
@@ -78,7 +70,8 @@ export default defineComponent({
       items: [] as Item[],
       itemsSelected: [] as Item[],
       modalEdit: false,
-      editedItem: {} as Item,
+      editedItem: {properties: { mag: 0}, id: ""},
+      newItem: {} as Item,
     };
   },
 
@@ -91,26 +84,37 @@ export default defineComponent({
 
   methods: {
     async deleteItem(item: Item) {
-      //await ApiService.delete(item._id);
-      const idx = this.items.findIndex((i) => i._id === item._id);
-      this.items.splice(idx, 1);
+      apiClient.delete(`/data/${item.id}`).then((response) => {
+        console.log(response.data);
+        this.items = this.items.filter((i) => i.id !== item.id);
+      })
       console.log("delete item", item);
     },
-    showModalEdit(item: Item) {
+    addItem() {
+      //await ApiService.post(this.newItem);
+      this.items.push(this.newItem);
+      this.newItem = {} as Item;
+      console.log("add item", this.newItem);
+    },
+    showModalEdit(item: any) {
       this.modalEdit = true;
       this.editedItem = item
       console.log("show modal edit", this.items);
     },
     editItem() {
       //find and replace editeditem in items
-      const idx = this.items.findIndex((i) => i._id === this.editedItem._id);
+      this.editedItem.properties.mag = Number(this.editedItem.properties.mag);
+      const idx = this.items.findIndex((i) => i.id === this.editedItem.id);
       this.items.splice(idx, 1, this.editedItem);
+      apiClient.put(`/data?id=${this.editedItem.id}`, this.editedItem).then((response) => {
+        console.log(response.data);
+      })
       //ApiService.update(this.editedItem._id, this.editedItem);
       this.cancelModalEdit();
     },
     cancelModalEdit() {
       this.modalEdit = false;
-      this.editedItem = {} as Item;
+      this.editedItem = {properties: { mag: 0}, id: ""};
     },
   },
 });
