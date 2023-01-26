@@ -34,13 +34,15 @@ class MongoHelper:
     def get(self, collection, data):
         # Récuperer les données
         # Modifier pour faire en aggregate. 
-        bd = self.bdd[collection].find(data)
-        # Agregate ?
-        # return self.agregate(bd, None)
+        return self.bdd[collection].find(data)
 
     def get_all(self, collection):
         # Récuperer toutes les données
-        self.bdd[collection].find()
+        return self.bdd[collection].find()
+
+    def get_yesterday(self,collection):
+        #recuperer les tremblements de terre d'hier
+        return self.bdd[collection].find({'yesterday':True})
 
     """
         Agregate

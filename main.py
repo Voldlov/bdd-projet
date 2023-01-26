@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import json
 from flask import Flask, request
-
+from create_historic_data import fetch_yesterday_api_data
 from earthquake import EarthquakeAPI
 from weather import WeatherAPI
 from mongo_helper import MongoHelper
@@ -18,8 +18,10 @@ earthquake_collection = "earthquake"
 aggregate_collection = "aggregate"
 
 earthquakeAPI = EarthquakeAPI()
+
 mongo_helper = MongoHelper("mongodb://localhost:27017", "earthquake")
 
+#mongo_helper.add("tremble",data)
 
 @app.route('/data', methods=['POST'])
 def create_data():
@@ -54,8 +56,9 @@ def delete_data():
 
 @app.route('/synchronize_live', methods=['POST'])
 def synch():
-    data = earthquakeAPI.fetch_yesterday_data()
-    return succes()
+    fetch_yesterday_api_data()
+    data=mongo_helper.get_yesterday(aggregate_collection)
+    return data
 
 
 if __name__ == '__main__':  # appler les fonctions a l'interieur du script
