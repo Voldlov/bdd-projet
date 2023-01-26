@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import json
 from flask import Flask, request
-from create_historic_data import fetch_yesterday_api_data
+from functions import fetch_data
 from earthquake import EarthquakeAPI
 from weather import WeatherAPI
 from mongo_helper import MongoHelper
@@ -56,8 +56,8 @@ def delete_data():
 
 @app.route('/synchronize_live', methods=['POST'])
 def synch():
-    fetch_yesterday_api_data()
-    data=mongo_helper.get_yesterday(aggregate_collection)
+    fetch_data(mongo_helper, WeatherAPI(), earthquakeAPI)
+    data = mongo_helper.get_yesterday(aggregate_collection)
     return data
 
 

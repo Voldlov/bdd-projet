@@ -1,8 +1,8 @@
 from bson import ObjectId
 from pymongo import MongoClient
 
-class MongoHelper:
 
+class MongoHelper:
     """
         Constructor
     """
@@ -12,7 +12,11 @@ class MongoHelper:
         self.client = MongoClient(connect)
         # Enregistrer la bdd voulu
         self.bdd = self.client[bdd]
-    
+
+    def drop(self, collection):
+        # Drop a collection
+        self.bdd[collection].drop()
+
     """
         CRUD
     """
@@ -40,9 +44,9 @@ class MongoHelper:
         # Récuperer toutes les données
         return self.bdd[collection].find()
 
-    def get_yesterday(self,collection):
-        #recuperer les tremblements de terre d'hier
-        return self.bdd[collection].find({'yesterday':True})
+    def get_yesterday(self, collection):
+        # recuperer les tremblements de terre d'hier
+        return self.bdd[collection].find({'yesterday': True})
 
     """
         Agregate
