@@ -41,6 +41,21 @@ Pour les fichiers :
 
 Clonez le projet sur votre ordinateur.
 
+### Environnement
+
+Copier le fichier .env.example en .env et le remplir avec vos informations.
+API_KEY correspond à la clé API de weatherapi 
+
+https://www.weatherapi.com/
+
+### Données
+
+Pour remplir la base de données, il faut lancer le script de récupération de données historique (qui récupère un mois de données).
+    
+```python create_historic_data.py```
+
+Un processus de récupération de données puis d'agrégation est lancé.
+
 ### Backend (Flask)
 Installez les dépendances python
 
