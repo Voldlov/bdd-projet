@@ -17,6 +17,10 @@ class MongoHelper:
         # Drop a collection
         self.bdd[collection].drop()
 
+    def index_earthquake_id_on_earthquake_and_weather(self):
+        self.bdd["weather"].create_index("earthquake_id")
+        self.bdd["earthquake"].create_index("id")
+
     """
         CRUD
     """
@@ -58,3 +62,16 @@ class MongoHelper:
         pipeline = [trie]
         # Affection l'agregate à une collection et le retourner
         return collection.aggregate(pipeline)
+
+    def agregate_weather_and_earthquake(self, collection):
+        # Aggregate weather data corresponding to one earthquake
+        pipeline = [
+            {
+                "$lookup": {
+                    "from": "weather",
+                    "localField": "id",
+                    "foreignField": "earthquake_id",
+                    "as": "weather"
+                }
+            }]
+        return self.bdd[collection].aggregate(pipeline)
