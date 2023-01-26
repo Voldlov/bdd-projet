@@ -1,17 +1,21 @@
-import axios from 'axios';
 import type {AxiosInstance} from 'axios';
+import axios from 'axios';
 
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "http://localhost:5000/",
   headers: {
     "Content-type": "application/json",
   },
 });
 
 class ApiService {
-    getAll() {
-        return apiClient.get("/data");
+    async getAll() {
+        const promise = apiClient.get("/data")
+        const response = promise.then((response) => {
+            response.data
+        })
+        return response
     }
 
     create(data: any) {

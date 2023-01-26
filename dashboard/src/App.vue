@@ -46,29 +46,49 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import type { Header, Item } from "vue3-easy-data-table";
-import ApiService from "@/services/api";
+import type {AxiosInstance} from 'axios';
+import axios from 'axios';
+
+const apiClient: AxiosInstance = axios.create({
+  baseURL: "http://localhost:5000/",
+  headers: {
+    "Content-type": "application/json",
+  },
+});
 
 export default defineComponent({
 
   data() {
     return {
       headers: [
-        { text: "Magnitude", value: "magnitude", sortable: true },
-        { text: "Date", value: "date", sortable: true },
-        { text: "Latitude", value: "latitude"},
-        { text: "Longitude", value: "longitude"},
+        { text: "Magnitude", value: "properties.mag", sortable: true },
+        { text: "Date", value: "weather_before.time", sortable: true },
+        { text: "Longitute, Latitude, Profondeur", value: "geometry.coordinates"},
+        { text: "Température avant (C)", value: "weather_before.temp_c", sortable: false },
+        { text: "Température après (C)", value: "weather_after.temp_c", sortable: false },
+        { text: "Pression avant (mb)", value: "weather_before.pressure_mb", sortable: false },
+        { text: "Pression après (mb)", value: "weather_after.pressure_mb", sortable: false },
         { text: "Opérations", value: "operation", sortable: false },
+        { text: "id", value: "id", sortable: false },
       ] as unknown as Header[],
-      items:  [
-      { "_id": "ObjectId(feweweoip)", "magnitude": 8, "date": "18-04-2012", "latitude": 245, "longitude": 142},
-    ] as Item[],
+    //   items:  [
+    //   { "_id": "ObjectId(feweweoip)", "magnitude": 8, "date": "18-04-2012", "latitude": 245, "longitude": 142},
+    // ] as Item[],
       // fetch items from api
-      // items: ApiService.getEarthquakes(),
+      items: [] as Item[],
       itemsSelected: [] as Item[],
       modalEdit: false,
       editedItem: {} as Item,
     };
   },
+
+  mounted() {
+    apiClient.get('/data').then((response) => {
+      console.log(response.data);
+      this.items = response.data;
+    })
+  },
+
   methods: {
     async deleteItem(item: Item) {
       //await ApiService.delete(item._id);
