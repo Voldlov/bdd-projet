@@ -13,14 +13,18 @@
 
 ## Le projet
 
-Etude des tremblements de terre. 
+La planète est raversée par des tremblements de terre. Pouvons-nous les prévoir ou voir les effets de leur passage par la météo ? Nous étudions la météos du lieu de tremblement de terre pour, peut-être, y trouver une corrélation.  
 
 ## Outils utilisés
 
 - Trello : Application de la méthode agile et organisation.
 - Github : dépôt, mettre en commun et rendu.
-- Python, Flask (HTML-CSS) : Interface et programmation
+- Python, Flask (HTML-CSS) et divers librairies : Interface et programmation
 - MongoDB : Base de donnée
+
+### Installer les librairies
+
+Vous trouverez les façon d'installer les librairies dans les fichiers même, en commentaire dans la partie dédié à leur importation. 
 
 ### API et fichiers 
 
