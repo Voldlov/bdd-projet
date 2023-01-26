@@ -1,4 +1,3 @@
-$ pip freeze 
 flask
 pymongo
 requests
