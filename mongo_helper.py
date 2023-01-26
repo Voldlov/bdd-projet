@@ -34,15 +34,17 @@ class MongoHelper:
     def get(self, collection, data):
         # Récuperer les données
         # Modifier pour faire en aggregate. 
-        self.bdd[collection].find(data)
+        bd = self.bdd[collection].find(data)
+        # Agregate ?
+        # return self.agregate(bd, None)
 
     """
         Agregate
     """
 
-    def agregate(self):
-        pass
-
-    """
-        Tests
-    """
+    def agregate(self, collection, trie):
+        # Fonction de trie
+        # Pipeline avec ce que l'agregate doit faire
+        pipeline = [trie]
+        # Affection l'agregate à une collection et le retourner
+        return collection.aggregate(pipeline)
