@@ -38,6 +38,10 @@ class MongoHelper:
         # Agregate ?
         # return self.agregate(bd, None)
 
+    def get_all(self, collection):
+        # Récuperer toutes les données
+        self.bdd[collection].find()
+
     """
         Agregate
     """
