@@ -28,14 +28,8 @@ Vous trouverez les façon d'installer les librairies dans les fichiers même, en
 
 ### API et fichiers 
 
-Pour les API :
-- Quelles sont les données de l’API (pourquoi cette API)
-- Les paramètres possibles
-- La réponse et les clés possibles
-
-Pour les fichiers :
-- Quels sont les données de ce fichier (pourquoi ce/ces fichier)
-- Les colonnes et leur utilité
+API de tremblement de terre.
+API de météo.
 
 ## Installation
 
